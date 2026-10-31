@@ -4,7 +4,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from research_agent.domain import ClaimAssessment, Document, ReportDraft, RunState
-from research_agent.report_model import channel_summary, safe_url
+from research_agent.report_model import channel_summary, report_bundle, safe_url
 from research_agent.reporting import backfill_reports, safe_link, validate_report
 from research_agent.web import create_app
 
@@ -125,6 +125,15 @@ def test_partial_channel_never_looks_fully_covered():
     assert channels[0]['status'] == 'partial'
     assert channels[1]['status'] == 'partial'
     assert channels[-1]['status'] == 'not_scanned'
+
+
+def test_report_origin_requires_matching_model_output_event(store):
+    state = record(store, 'provenance')
+    assert report_bundle(state, store, 'partial', state.draft)['origin'] == 'structured_record'
+    store.event(state.run_id, 'report_draft', state.draft.model_dump())
+    assert report_bundle(state, store, 'partial', state.draft)['origin'] == 'model'
+    state.draft = ReportDraft(headline='Structured fallback after citation rejection')
+    assert report_bundle(state, store, 'partial', state.draft)['origin'] == 'structured_record'
 
 
 def test_recommendation_cannot_use_superseded_evidence(store):
