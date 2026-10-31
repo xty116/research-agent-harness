@@ -1,0 +1,39 @@
+name: Import checked source snapshot
+on:
+  push:
+    paths: ['.github/workflows/import-source.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify and unpack the approved source snapshot
+        shell: python
+        run: |
+          import hashlib, pathlib, zipfile
+          archive = pathlib.Path('research-agent-harness-source.zip')
+          assert hashlib.sha256(archive.read_bytes()).hexdigest() == '2dbc0d0f742dcb19d998271ad05bce1d4211a22f1df4a452c9bc3e194054cf28'
+          with zipfile.ZipFile(archive) as source:
+              entries = source.infolist()
+              assert len(entries) == 81
+              assert sum(i.file_size for i in entries) < 10_000_000
+              for entry in entries:
+                  path = pathlib.PurePosixPath(entry.filename)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert entry.filename.startswith(('.github/', 'config/', 'docs/', 'evals/', 'examples/', 'scripts/', 'skills/', 'src/', 'tests/')) or entry.filename in ('.env.example', '.gitignore', 'AGENTS.md', 'README.md', 'pyproject.toml', 'uv.lock')
+                  assert not entry.filename.endswith(('.local.yaml', '.local.md', '.sqlite3', '.plist', '.pyc'))
+                  assert '.env' not in path.parts
+              for entry in entries:
+                  if entry.filename != '.github/workflows/check.yml':
+                      source.extract(entry, '.')
+      - name: Commit the full source tree and remove import artifacts
+        run: |
+          git rm research-agent-harness-source.zip
+          git add .
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Import verified research agent source, dashboard, reports and documentation'
+          git push origin HEAD:main
