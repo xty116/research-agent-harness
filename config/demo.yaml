@@ -1,0 +1,8 @@
+mode: demo
+data_dir: data/portable-demo
+reports_dir: reports/portable-demo
+secrets_file: ''
+memory:
+  embedding_enabled: false
+schedule:
+  enabled: false

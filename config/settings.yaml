@@ -1,0 +1,51 @@
+mode: live
+data_dir: data
+reports_dir: reports
+secrets_file: ''
+llm:
+  base_url: https://api.deepseek.com
+  weak_model: deepseek-chat
+  strong_model: deepseek-reasoner
+  timeout_seconds: 90
+  max_output_tokens: 3000
+  strong_max_output_tokens: 6500
+  reasoning_effort: low
+  retries: 2
+  input_usd_per_million: 1.0
+  output_usd_per_million: 5.0
+budget:
+  per_run_usd: 0.3
+  per_day_usd: 0.6
+  report_reserve_usd: 0.12
+  search_credits_per_run: 16
+  search_credits_per_day: 30
+  max_steps: 24
+  max_seconds: 600
+  max_repeated_action: 2
+context:
+  max_input_tokens: 24000
+  max_evidence_tokens: 4500
+  max_memory_tokens: 1800
+  max_skill_tokens: 2600
+  recent_observations: 4
+memory:
+  recall_limit: 8
+  history_days: 30
+  retry_after_hours: 24
+  embedding_model: Qwen/Qwen3-Embedding-0.6B-Q
+  embedding_enabled: false
+  embedding_cache: data/models
+sources:
+  time_window_days: 7
+  max_items_per_source: 6
+  rss_feeds:
+  - https://huggingface.co/blog/feed.xml
+  - https://www.technologyreview.com/feed/
+schedule:
+  enabled: false
+  timezone: Australia/Sydney
+  hour: 8
+  minute: 30
+web:
+  host: 127.0.0.1
+  port: 8765

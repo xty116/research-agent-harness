@@ -1,0 +1,26 @@
+[
+  {
+    "id": "overall-versus-subset",
+    "claim": "Model A ranks first overall on Bench2026.",
+    "text": "Official Bench2026 results: Model B ranks first overall. Model A ranks first only in the open-model subset.",
+    "expected": "contradict"
+  },
+  {
+    "id": "wrong-version",
+    "claim": "Model A achieves 94 percent accuracy on Benchmark v2.",
+    "text": "Official results for Model A on Benchmark v1: accuracy 94 percent. This page provides no Benchmark v2 result.",
+    "expected": "unverified"
+  },
+  {
+    "id": "advertised-versus-delivered",
+    "claim": "Supplier Z has delivered one million independently verified medical annotations.",
+    "text": "Supplier Z advertises a capacity of one million medical annotations per month. No completed-delivery count or independent quality evaluation is provided.",
+    "expected": "unverified"
+  },
+  {
+    "id": "explicit-release-metadata",
+    "claim": "Dataset Q release 1.0 is labeled CC-BY-4.0 in its official release metadata.",
+    "text": "Official Dataset Q release metadata. Version: 1.0. License label: CC-BY-4.0. Publication date: 2026-10-29.",
+    "expected": "support"
+  }
+]

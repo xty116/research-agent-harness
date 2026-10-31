@@ -1,0 +1,19 @@
+daily_prompt: |
+  完成今日数据情报研究，覆盖 Benchmark、竞品、人才、供应商四个方向。
+  识别增量进展并复核历史待解决问题，优先取得原始证据。
+  对重要结论明确模型版本、评测集、指标、时间与适用范围。
+  输出带来源的中文日报及 P0/P1/P2 数据储备建议，区分事实、推断和未知。
+  在预算与截止时间内完成；没有更新时明确说明，不为填满栏目制造发现。
+topics:
+  - dimension: benchmark
+    weight: 5
+    query: LLM benchmark evaluation dataset new release
+  - dimension: competitor
+    weight: 4
+    query: AI model release technical report training data
+  - dimension: talent
+    weight: 2
+    query: AI research team researcher joins official announcement
+  - dimension: supplier
+    weight: 3
+    query: AI data annotation dataset supplier partnership announcement

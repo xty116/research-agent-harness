@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "run_id": "f8c27729e8da4acf",
+  "day": "2026-11-01",
+  "mode": "demo",
+  "kind": "demo",
+  "status": "complete",
+  "title": "合成案例：模型榜单口径核验",
+  "scope": "合成演示：内容与决策为离线回放，不是实际情报或真实模型能力评估。",
+  "phase": "done",
+  "started_at": "2026-10-31T15:33:14.011109+00:00",
+  "snapshot_at": "2026-10-31T15:33:14.071539+00:00",
+  "elapsed_seconds": 0,
+  "finish_reason": "model_finished",
+  "steps": 7,
+  "origin": "model",
+  "summary": "原始结果与全榜第一的新闻表述冲突：模型 A 仅在开放模型子榜单领先。",
+  "findings": [
+    {
+      "dimension": "benchmark",
+      "text": "原始结果与全榜第一的新闻表述冲突：模型 A 仅在开放模型子榜单领先。",
+      "claim_ids": [
+        "claim_61db7384b3c54908"
+      ],
+      "inference": false
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "P1",
+      "action": "对齐榜单分类后再安排评测样本覆盖检查。",
+      "basis_claim_ids": [
+        "claim_61db7384b3c54908"
+      ],
+      "uncertainty": "演示数据，不用于实际业务决策。"
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_61db7384b3c54908",
+      "task_id": "task_169399851b49892b4ebf",
+      "created_at": "2026-10-31T15:33:14.034700+00:00",
+      "is_current": true,
+      "claim": "Model A ranks first overall on CodeBench v2.",
+      "entity": "Model A",
+      "verdict": "contradict",
+      "rationale": "The original result distinguishes overall and open-model rankings.",
+      "citations": [
+        {
+          "document_id": "doc_224fc0973b3f45dbfc3c",
+          "quote": "Model B leads the overall CodeBench v2 ranking. Model A leads only the open-model subset.",
+          "stance": "contradict",
+          "source": {
+            "id": "doc_224fc0973b3f45dbfc3c",
+            "title": "Synthetic official CodeBench v2 results",
+            "url": "https://research-demo.invalid/model-a",
+            "source": "demo",
+            "kind": "full_text",
+            "dimension": "benchmark",
+            "published_at": null,
+            "fetched_at": "2026-10-31T15:33:14.024749+00:00",
+            "characters": 89
+          }
+        }
+      ],
+      "confidence": 0.85,
+      "resolved_gaps": [
+        "leaderboard category"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "doc_224fc0973b3f45dbfc3c",
+      "title": "Synthetic official CodeBench v2 results",
+      "url": "https://research-demo.invalid/model-a",
+      "source": "demo",
+      "kind": "full_text",
+      "dimension": "benchmark",
+      "published_at": null,
+      "fetched_at": "2026-10-31T15:33:14.024749+00:00",
+      "characters": 89
+    },
+    {
+      "id": "doc_2a86f646c1e014fa12e8",
+      "title": "Synthetic Model A ranking headline",
+      "url": "https://research-demo.invalid/model-a",
+      "source": "demo",
+      "kind": "snippet",
+      "dimension": "benchmark",
+      "published_at": "2026-11-01",
+      "fetched_at": "2026-10-31T15:33:14.011405+00:00",
+      "characters": 44
+    }
+  ],
+  "channels": [
+    {
+      "key": "web",
+      "name": "全网检索",
+      "symbol": "W",
+      "status": "ok",
+      "items": 4,
+      "dropped": 0,
+      "errors": [],
+      "message": "正常"
+    },
+    {
+      "key": "papers",
+      "name": "论文",
+      "symbol": "P",
+      "status": "ok",
+      "items": 0,
+      "dropped": 0,
+      "errors": [],
+      "message": "正常"
+    },
+    {
+      "key": "github",
+      "name": "GitHub",
+      "symbol": "G",
+      "status": "ok",
+      "items": 0,
+      "dropped": 0,
+      "errors": [],
+      "message": "正常"
+    },
+    {
+      "key": "huggingface",
+      "name": "HuggingFace",
+      "symbol": "H",
+      "status": "ok",
+      "items": 0,
+      "dropped": 0,
+      "errors": [],
+      "message": "正常"
+    },
+    {
+      "key": "rss",
+      "name": "RSS 订阅",
+      "symbol": "R",
+      "status": "ok",
+      "items": 0,
+      "dropped": 0,
+      "errors": [],
+      "message": "正常"
+    }
+  ],
+  "coverage": {
+    "web:benchmark": {
+      "status": "ok",
+      "items": 1,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": [
+        "doc_2a86f646c1e014fa12e8"
+      ]
+    },
+    "web:competitor": {
+      "status": "ok",
+      "items": 1,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": [
+        "doc_2a86f646c1e014fa12e8"
+      ]
+    },
+    "web:talent": {
+      "status": "ok",
+      "items": 1,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": [
+        "doc_2a86f646c1e014fa12e8"
+      ]
+    },
+    "web:supplier": {
+      "status": "ok",
+      "items": 1,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": [
+        "doc_2a86f646c1e014fa12e8"
+      ]
+    },
+    "papers": {
+      "status": "ok",
+      "items": 0,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": []
+    },
+    "github": {
+      "status": "ok",
+      "items": 0,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": []
+    },
+    "huggingface": {
+      "status": "ok",
+      "items": 0,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": []
+    },
+    "rss": {
+      "status": "ok",
+      "items": 0,
+      "dropped_by_date": 0,
+      "partial_failures": [],
+      "document_ids": []
+    }
+  },
+  "tasks": [
+    {
+      "id": "task_169399851b49892b4ebf",
+      "dimension": "benchmark",
+      "goal": "Verify whether Model A ranks first overall on CodeBench v2",
+      "entity": "Model A",
+      "priority": 5,
+      "reason": "Headline requires category verification",
+      "missing": [],
+      "document_ids": [
+        "doc_2a86f646c1e014fa12e8",
+        "doc_224fc0973b3f45dbfc3c"
+      ],
+      "done_when": "Resolve the overall-rank assertion using a quoted original result",
+      "status": "done",
+      "attempts": 7,
+      "retry_after": null
+    }
+  ],
+  "warnings": [
+    "本次为合成回放，不能用于估计真实模型准确率或运行成本。"
+  ],
+  "quality": {
+    "factuality": 8,
+    "completeness": 8,
+    "citations": 8,
+    "timeliness": 8,
+    "actionability": 8,
+    "issues": [],
+    "summary": "合成轨迹保留了榜单分类与证据，实际效果仍需真实案例评测。",
+    "notes": []
+  },
+  "quality_passed": true,
+  "evaluation_cases": [],
+  "usage": {
+    "usd": 0,
+    "search_credits": 0,
+    "requests": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "reasoning_tokens": 0,
+    "uncertain_requests": 0,
+    "total_tokens": 0
+  },
+  "stages": [],
+  "requested_models": [],
+  "provider_models": [],
+  "loaded_skills": [
+    "research-planning",
+    "web-research",
+    "evidence-review",
+    "benchmark-verification"
+  ],
+  "events_count": 37,
+  "counts": {
+    "findings": 1,
+    "claims": 1,
+    "sources": 2,
+    "tasks_done": 1,
+    "tasks": 1,
+    "channels_ok": 5
+  }
+}
