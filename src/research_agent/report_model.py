@@ -85,6 +85,11 @@ def report_bundle(state: RunState, store, status: str, draft: ReportDraft, metad
     kind = kind_of({"id": state.run_id, "mode": state.mode})
     events = store.events(state.run_id, limit=1000)
     cases = [e["payload"] for e in events if e["kind"] == "evaluation_case"]
+    # A persisted draft can also be the deterministic fallback after a failed model report.
+    # Only the matching, recorded model output establishes model provenance.
+    origin = "model" if state.draft and any(
+        e["kind"] == "report_draft" and e["payload"] == state.draft.model_dump() for e in events
+    ) else "structured_record"
     title = draft.headline
     if kind == "evaluation":
         title = f"断言核验评测 · {len(cases)} 个标注案例"
@@ -147,7 +152,7 @@ def report_bundle(state: RunState, store, status: str, draft: ReportDraft, metad
             "kind": kind, "status": status, "title": title, "scope": scope, "phase": state.phase,
             "started_at": state.started_at, "snapshot_at": updated, "elapsed_seconds": elapsed,
             "finish_reason": state.finish_reason, "steps": state.steps,
-            "origin": "model" if state.draft else "structured_record",
+            "origin": origin,
             "summary": draft.findings[0].text if draft.findings else
                        ("已记录评测结果，查看每个案例的预期与实际判定。" if cases else "本次尚未形成可交付的已核验发现；这不等于外部没有新进展。"),
             "findings": [f.model_dump() for f in draft.findings],
